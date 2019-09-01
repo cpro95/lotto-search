@@ -2,6 +2,8 @@
   "name": "lotto-search",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "author": "cpro95 <cpro95@gmail.com>",
   "dependencies": {
     "react": "^16.9.0",
     "react-burger-menu": "^2.6.11",

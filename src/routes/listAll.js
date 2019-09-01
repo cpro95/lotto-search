@@ -215,88 +215,85 @@ const ListAll = () => {
   return (
     <section>
       <Header />
-      <button className="btn btn-primary btn-sm" onClick={resetQuery}>
+      <button
+        className="mt-0 mb-2 w-100 btn btn-primary btn-sm"
+        onClick={resetQuery}
+      >
         Reset
       </button>
-      <div className="container-fluid">
-        <div className="input-group input-group-sm mb-3 row">
-          <input
-            type="text"
-            className="form-control col"
-            value={number1}
-            autoFocus
-            onChange={handleChange1}
-          />
-          <input
-            type="text"
-            min={1}
-            max={45}
-            className="form-control col"
-            value={number2}
-            onChange={handleChange2}
-          />
-          <input
-            type="text"
-            min={1}
-            max={45}
-            className="form-control col"
-            value={number3}
-            onChange={handleChange3}
-          />
-          <input
-            type="text"
-            min={1}
-            max={45}
-            className="form-control col"
-            value={number4}
-            onChange={handleChange4}
-          />
-          <input
-            type="text"
-            min={1}
-            max={45}
-            className="form-control col"
-            value={number5}
-            onChange={handleChange5}
-          />
-          <input
-            type="text"
-            min={1}
-            max={45}
-            className="form-control col"
-            value={number6}
-            onChange={handleChange6}
-          />
+      <div className="mx-auto input-group input-group-sm mb-3 row">
+        <input
+          type="text"
+          className="form-control col"
+          value={number1}
+          autoFocus
+          onChange={handleChange1}
+        />
+        <input
+          type="text"
+          min={1}
+          max={45}
+          className="form-control col"
+          value={number2}
+          onChange={handleChange2}
+        />
+        <input
+          type="text"
+          min={1}
+          max={45}
+          className="form-control col"
+          value={number3}
+          onChange={handleChange3}
+        />
+        <input
+          type="text"
+          min={1}
+          max={45}
+          className="form-control col"
+          value={number4}
+          onChange={handleChange4}
+        />
+        <input
+          type="text"
+          min={1}
+          max={45}
+          className="form-control col"
+          value={number5}
+          onChange={handleChange5}
+        />
+        <input
+          type="text"
+          min={1}
+          max={45}
+          className="form-control col"
+          value={number6}
+          onChange={handleChange6}
+        />
+      </div>
+      <div className="row">
+        <div className="col text-center">
+          <span className="btn btn-primary btn-circle">{number1}</span>
         </div>
-        <div className="row">
-          <div className="col text-center">
-            <span className="btn btn-primary btn-circle">{number1}</span>
-          </div>
-          <div className="col text-center">
-            <span className="btn btn-warning btn-circle">{number2}</span>
-          </div>
-          <div className="col text-center">
-            <span className="btn btn-secondary btn-circle">{number3}</span>
-          </div>
-          <div className="col text-center">
-            <span className="btn btn-info btn-circle">{number4}</span>
-          </div>
-          <div className="col text-center">
-            <span className="btn btn-success btn-circle">{number5}</span>
-          </div>
-          <div className="col text-center">
-            <span className="btn btn-danger btn-circle">{number6}</span>
-          </div>
+        <div className="col text-center">
+          <span className="btn btn-warning btn-circle">{number2}</span>
+        </div>
+        <div className="col text-center">
+          <span className="btn btn-secondary btn-circle">{number3}</span>
+        </div>
+        <div className="col text-center">
+          <span className="btn btn-info btn-circle">{number4}</span>
+        </div>
+        <div className="col text-center">
+          <span className="btn btn-success btn-circle">{number5}</span>
+        </div>
+        <div className="col text-center">
+          <span className="btn btn-danger btn-circle">{number6}</span>
         </div>
       </div>
 
-      <h6>Total: {filteredLotto.length} </h6>
+      <h6 className="mt-3">Total: {filteredLotto.length} </h6>
       <table className="table table-striped">
-        <thead className="thead-dark">
-          <tr>
-            <th scope="col">Data</th>
-          </tr>
-        </thead>
+        {/* <thead className="thead-dark"></thead> */}
         <tbody>
           {filteredLotto.map((d, i) => (
             <tr key={i}>
@@ -307,8 +304,8 @@ const ListAll = () => {
                     state: d
                   }}
                 >
-                {d.round} / {d.date} / {d.no1}-{d.no2}-{d.no3}-{d.no4}-{d.no5}-
-                {d.no6}
+                  {d.round} / {d.date} / {d.no1}-{d.no2}-{d.no3}-{d.no4}-{d.no5}
+                  -{d.no6}
                 </Link>
               </td>
             </tr>
