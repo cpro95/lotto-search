@@ -1,56 +1,116 @@
-import React, { useState } from "react";
-import * as lottoDB from "../lotto_db.json";
-import Header from "../components/header";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import * as lottoDB from '../lotto_db.json';
+import Header from '../components/header';
+import { Link } from 'react-router-dom';
+import { Paper, Typography } from '@material-ui/core';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Button,
+  Grid,
+  Avatar,
+  TextField
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  deepOrange,
+  deepPurple,
+  green,
+  indigo,
+  brown
+} from '@material-ui/core/colors';
+
+const useStyles = makeStyles({
+  avatar: {
+    margin: 5,
+    color: '#fff',
+    backgroundColor: 'grey',
+    textAlign: 'center'
+  },
+  orangeAvatar: {
+    margin: 5,
+    color: '#fff',
+    backgroundColor: deepOrange[500],
+    textAlign: 'center'
+  },
+  purpleAvatar: {
+    margin: 5,
+    color: '#fff',
+    backgroundColor: deepPurple[500],
+    textAlign: 'center'
+  },
+  greenAvatar: {
+    margin: 5,
+    color: '#fff',
+    backgroundColor: green[500],
+    textAlign: 'center'
+  },
+  indigoAvatar: {
+    margin: 5,
+    color: '#fff',
+    backgroundColor: indigo[500],
+    textAlign: 'center'
+  },
+  brownAvatar: {
+    margin: 5,
+    color: '#fff',
+    backgroundColor: brown[500],
+    textAlign: 'center'
+  }
+});
 
 const ListAll = () => {
+  const classes = useStyles();
   // After importing array from files, it returns Object.
   // Your data is in Object.default
   let totalLottoDB = lottoDB.default;
   // console.log(totalLottoDB);
 
-  const [number1, setNumber1] = useState("");
-  const [number2, setNumber2] = useState("");
-  const [number3, setNumber3] = useState("");
-  const [number4, setNumber4] = useState("");
-  const [number5, setNumber5] = useState("");
-  const [number6, setNumber6] = useState("");
+  const [number1, setNumber1] = useState('');
+  const [number2, setNumber2] = useState('');
+  const [number3, setNumber3] = useState('');
+  const [number4, setNumber4] = useState('');
+  const [number5, setNumber5] = useState('');
+  const [number6, setNumber6] = useState('');
   const [filteredLotto, setFilteredLotto] = useState(totalLottoDB);
 
   const resetQuery = () => {
     console.log(number1);
-    setNumber1("");
-    setNumber2("");
-    setNumber3("");
-    setNumber4("");
-    setNumber5("");
-    setNumber6("");
+    setNumber1('');
+    setNumber2('');
+    setNumber3('');
+    setNumber4('');
+    setNumber5('');
+    setNumber6('');
     setFilteredLotto(totalLottoDB);
   };
 
   const consoleSearchNumber = no => {
-    console.log("inside searchNumber : " + no);
+    console.log('inside searchNumber : ' + no);
   };
 
   const searchNumber = (number, no) => {
-    console.log("inside searchNumber");
+    console.log('inside searchNumber');
     consoleNumber();
     consoleSearchNumber(no);
     var filtered;
-    if (no === "no1") {
+    if (no === 'no1') {
       filtered = totalLottoDB.filter(dd => {
         if (dd[no] === parseInt(number, 10)) return true;
         else return false;
       });
     }
-    if (no === "no2") {
+    if (no === 'no2') {
       filtered = totalLottoDB.filter(dd => {
         if (dd.no1 === parseInt(number1, 10) && dd[no] === parseInt(number, 10))
           return true;
         else return false;
       });
     }
-    if (no === "no3") {
+    if (no === 'no3') {
       filtered = totalLottoDB.filter(dd => {
         if (
           dd.no1 === parseInt(number1, 10) &&
@@ -61,7 +121,7 @@ const ListAll = () => {
         else return false;
       });
     }
-    if (no === "no4") {
+    if (no === 'no4') {
       filtered = totalLottoDB.filter(dd => {
         if (
           dd.no1 === parseInt(number1, 10) &&
@@ -73,7 +133,7 @@ const ListAll = () => {
         else return false;
       });
     }
-    if (no === "no5") {
+    if (no === 'no5') {
       filtered = totalLottoDB.filter(dd => {
         if (
           dd.no1 === parseInt(number1, 10) &&
@@ -86,7 +146,7 @@ const ListAll = () => {
         else return false;
       });
     }
-    if (no === "no6") {
+    if (no === 'no6') {
       filtered = totalLottoDB.filter(dd => {
         if (
           dd.no1 === parseInt(number1, 10) &&
@@ -104,26 +164,26 @@ const ListAll = () => {
   };
 
   const consoleNumber = () => {
-    console.log("1 : " + number1);
-    console.log("2 : " + number2);
-    console.log("3 : " + number3);
-    console.log("4 : " + number4);
-    console.log("5 : " + number5);
-    console.log("6 : " + number6);
+    console.log('1 : ' + number1);
+    console.log('2 : ' + number2);
+    console.log('3 : ' + number3);
+    console.log('4 : ' + number4);
+    console.log('5 : ' + number5);
+    console.log('6 : ' + number6);
   };
 
   const handleChange1 = e => {
     console.log(e.target.value);
-    if (e.target.value.trim() === "") {
+    if (e.target.value.trim() === '') {
       setFilteredLotto(totalLottoDB);
-      console.log("inside handlechange1 if blank");
-      setNumber1("");
+      console.log('inside handlechange1 if blank');
+      setNumber1('');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
         if (inputData > 0) {
-          searchNumber(inputData, "no1");
+          searchNumber(inputData, 'no1');
         }
         setNumber1(e.target.value);
       }
@@ -131,17 +191,17 @@ const ListAll = () => {
   };
   const handleChange2 = e => {
     console.log(e.target.value);
-    if (e.target.value.trim() === "") {
+    if (e.target.value.trim() === '') {
       // setFilteredLotto(totalLottoDB);
-      console.log("inside handlechange2 if blank");
-      setNumber2("");
-      searchNumber(number1, "no1");
+      console.log('inside handlechange2 if blank');
+      setNumber2('');
+      searchNumber(number1, 'no1');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
         if (inputData > 0) {
-          searchNumber(inputData, "no2");
+          searchNumber(inputData, 'no2');
         }
         setNumber2(e.target.value);
       }
@@ -149,15 +209,15 @@ const ListAll = () => {
   };
   const handleChange3 = e => {
     console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      setNumber3("");
-      searchNumber(number2, "no2");
+    if (e.target.value.trim() === '') {
+      setNumber3('');
+      searchNumber(number2, 'no2');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
         if (inputData > 0) {
-          searchNumber(inputData, "no3");
+          searchNumber(inputData, 'no3');
         }
         setNumber3(e.target.value);
       }
@@ -165,15 +225,15 @@ const ListAll = () => {
   };
   const handleChange4 = e => {
     console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      setNumber4("");
-      searchNumber(number3, "no3");
+    if (e.target.value.trim() === '') {
+      setNumber4('');
+      searchNumber(number3, 'no3');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
         if (inputData > 0) {
-          searchNumber(inputData, "no4");
+          searchNumber(inputData, 'no4');
         }
         setNumber4(e.target.value);
       }
@@ -181,15 +241,15 @@ const ListAll = () => {
   };
   const handleChange5 = e => {
     console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      setNumber5("");
-      searchNumber(number4, "no4");
+    if (e.target.value.trim() === '') {
+      setNumber5('');
+      searchNumber(number4, 'no4');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
         if (inputData > 0) {
-          searchNumber(inputData, "no5");
+          searchNumber(inputData, 'no5');
         }
         setNumber5(e.target.value);
       }
@@ -197,15 +257,15 @@ const ListAll = () => {
   };
   const handleChange6 = e => {
     console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      setNumber6("");
-      searchNumber(number5, "no5");
+    if (e.target.value.trim() === '') {
+      setNumber6('');
+      searchNumber(number5, 'no5');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
         if (inputData > 0) {
-          searchNumber(inputData, "no6");
+          searchNumber(inputData, 'no6');
         }
         setNumber6(e.target.value);
       }
@@ -213,107 +273,140 @@ const ListAll = () => {
   };
 
   return (
-    <section>
+    <>
       <Header />
-      <button
-        className="mt-0 mb-2 w-100 btn btn-primary btn-sm"
+      <Paper>
+        <Typography
+          variant="h2"
+          style={{ textAlign: 'center', padding: '20px' }}
+        >
+          Search My Data
+        </Typography>
+      </Paper>
+      <Button
+        variant="contained"
+        style={{
+          background: 'purple',
+          color: 'white',
+          width: '100%',
+          marginTop: '10px',
+          marginBottom: '10px'
+        }}
         onClick={resetQuery}
       >
         Reset
-      </button>
-      <div className="mx-auto input-group input-group-sm mb-3 row">
-        <input
-          type="text"
-          className="form-control col"
-          value={number1}
-          autoFocus
-          onChange={handleChange1}
-        />
-        <input
-          type="text"
-          min={1}
-          max={45}
-          className="form-control col"
-          value={number2}
-          onChange={handleChange2}
-        />
-        <input
-          type="text"
-          min={1}
-          max={45}
-          className="form-control col"
-          value={number3}
-          onChange={handleChange3}
-        />
-        <input
-          type="text"
-          min={1}
-          max={45}
-          className="form-control col"
-          value={number4}
-          onChange={handleChange4}
-        />
-        <input
-          type="text"
-          min={1}
-          max={45}
-          className="form-control col"
-          value={number5}
-          onChange={handleChange5}
-        />
-        <input
-          type="text"
-          min={1}
-          max={45}
-          className="form-control col"
-          value={number6}
-          onChange={handleChange6}
-        />
-      </div>
-      <div className="row">
-        <div className="col text-center">
-          <span className="btn btn-primary btn-circle">{number1}</span>
-        </div>
-        <div className="col text-center">
-          <span className="btn btn-warning btn-circle">{number2}</span>
-        </div>
-        <div className="col text-center">
-          <span className="btn btn-secondary btn-circle">{number3}</span>
-        </div>
-        <div className="col text-center">
-          <span className="btn btn-info btn-circle">{number4}</span>
-        </div>
-        <div className="col text-center">
-          <span className="btn btn-success btn-circle">{number5}</span>
-        </div>
-        <div className="col text-center">
-          <span className="btn btn-danger btn-circle">{number6}</span>
-        </div>
-      </div>
+      </Button>
 
-      <h6 className="mt-3">Total: {filteredLotto.length} </h6>
-      <table className="table table-striped">
-        {/* <thead className="thead-dark"></thead> */}
-        <tbody>
+      <Grid container justify="center" alignItems="center">
+        <Grid item xs={2}>
+          <TextField
+            value={number1}
+            onChange={handleChange1}
+            margin="dense"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            value={number2}
+            onChange={handleChange2}
+            margin="dense"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            value={number3}
+            onChange={handleChange3}
+            margin="dense"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            value={number4}
+            onChange={handleChange4}
+            margin="dense"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            value={number5}
+            onChange={handleChange5}
+            margin="dense"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            value={number6}
+            onChange={handleChange6}
+            margin="dense"
+            variant="outlined"
+          />
+        </Grid>
+      </Grid>
+
+      <Grid container justify="center" alignItems="center">
+        <Grid item xs={2}>
+          <Avatar className={classes.avatar}>{number1}</Avatar>
+        </Grid>
+        <Grid item xs={2}>
+          <Avatar className={classes.orangeAvatar}>{number2}</Avatar>
+        </Grid>
+        <Grid item xs={2}>
+          <Avatar className={classes.purpleAvatar}>{number3}</Avatar>
+        </Grid>
+        <Grid item xs={2}>
+          <Avatar className={classes.greenAvatar}>{number4}</Avatar>
+        </Grid>
+        <Grid item xs={2}>
+          <Avatar className={classes.indigoAvatar}>{number5}</Avatar>
+        </Grid>
+        <Grid item xs={2}>
+          <Avatar className={classes.brownAvatar}>{number6}</Avatar>
+        </Grid>
+      </Grid>
+
+      <Table>
+        <TableHead>
+          <TableRow style={{ background: 'black' }}>
+            <TableCell>
+              <Typography
+                style={{ fontSize: '1.2rem', color: 'white', marginTop: '3px' }}
+              >
+                Total: {filteredLotto.length}
+              </Typography>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {filteredLotto.map((d, i) => (
-            <tr key={i}>
-              <td>
+            <TableRow
+              key={i}
+              style={
+                i % 2 ? { background: '#dee2e6' } : { background: 'white' }
+              }
+            >
+              <TableCell>
                 <Link
                   to={{
                     pathname: `${i}`,
                     state: d
                   }}
                 >
-                  {d.round} / {d.date} / {d.no1}-{d.no2}-{d.no3}-{d.no4}-{d.no5}
-                  -{d.no6}
+                  <Typography variant="p" style={{ fontSize: '1rem' }}>
+                    {d.round} / {d.date} / {d.no1}-{d.no2}-{d.no3}-{d.no4}-
+                    {d.no5}-{d.no6}
+                  </Typography>
                 </Link>
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
-      <div />
-    </section>
+        </TableBody>
+      </Table>
+    </>
   );
 };
 

@@ -1,16 +1,21 @@
 import React from 'react';
 import Header from '../components/header';
+import { Paper, Typography } from '@material-ui/core';
 
 const About = () => {
   return (
-    <section>
+    <>
       <Header />
-      <div className="container-fluid">
-        <p>This SPA app is made by ReactJS with Bootstrap CSS</p>
-        <p>You can search the patterns inside of your DB</p>
-        <p>Good Luck!</p>
-      </div>
-    </section>
+      <Paper style={{ margin: '20px', padding: '20px' }}>
+        <Typography variant="h5">
+          This SPA app is made by ReactJS with Material-UI
+          <br />
+          You can search the patterns inside of your DB
+          <br />
+          Good Luck!
+        </Typography>
+      </Paper>
+    </>
   );
 };
 
