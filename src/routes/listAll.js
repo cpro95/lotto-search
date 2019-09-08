@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import * as lottoDB from "../lotto_db.json";
-import Header from "../components/header";
-import { Link } from "react-router-dom";
-import { Paper, Typography } from "@material-ui/core";
+import React, { useState } from 'react';
+import * as lottoDB from '../lotto_db.json';
+import Header from '../components/header';
+import { Link } from 'react-router-dom';
+import { Paper, Typography } from '@material-ui/core';
 import {
   Table,
   TableBody,
@@ -13,52 +13,52 @@ import {
   Grid,
   Avatar,
   TextField
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   deepOrange,
   deepPurple,
   green,
   indigo,
   brown
-} from "@material-ui/core/colors";
+} from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   avatar: {
     margin: 5,
-    color: "#fff",
-    backgroundColor: "grey",
-    textAlign: "center"
+    color: '#fff',
+    backgroundColor: 'grey',
+    textAlign: 'center'
   },
   orangeAvatar: {
     margin: 5,
-    color: "#fff",
+    color: '#fff',
     backgroundColor: deepOrange[500],
-    textAlign: "center"
+    textAlign: 'center'
   },
   purpleAvatar: {
     margin: 5,
-    color: "#fff",
+    color: '#fff',
     backgroundColor: deepPurple[500],
-    textAlign: "center"
+    textAlign: 'center'
   },
   greenAvatar: {
     margin: 5,
-    color: "#fff",
+    color: '#fff',
     backgroundColor: green[500],
-    textAlign: "center"
+    textAlign: 'center'
   },
   indigoAvatar: {
     margin: 5,
-    color: "#fff",
+    color: '#fff',
     backgroundColor: indigo[500],
-    textAlign: "center"
+    textAlign: 'center'
   },
   brownAvatar: {
     margin: 5,
-    color: "#fff",
+    color: '#fff',
     backgroundColor: brown[500],
-    textAlign: "center"
+    textAlign: 'center'
   }
 });
 
@@ -69,211 +69,1091 @@ const ListAll = () => {
   let totalLottoDB = lottoDB.default;
   // console.log(totalLottoDB);
 
-  const [number1, setNumber1] = useState("");
-  const [number2, setNumber2] = useState("");
-  const [number3, setNumber3] = useState("");
-  const [number4, setNumber4] = useState("");
-  const [number5, setNumber5] = useState("");
-  const [number6, setNumber6] = useState("");
+  const [number1, setNumber1] = useState('');
+  const [number2, setNumber2] = useState('');
+  const [number3, setNumber3] = useState('');
+  const [number4, setNumber4] = useState('');
+  const [number5, setNumber5] = useState('');
+  const [number6, setNumber6] = useState('');
   const [filteredLotto, setFilteredLotto] = useState(totalLottoDB);
 
   const resetQuery = () => {
-    console.log(number1);
-    setNumber1("");
-    setNumber2("");
-    setNumber3("");
-    setNumber4("");
-    setNumber5("");
-    setNumber6("");
+    setNumber1('');
+    setNumber2('');
+    setNumber3('');
+    setNumber4('');
+    setNumber5('');
+    setNumber6('');
     setFilteredLotto(totalLottoDB);
   };
 
-  const consoleSearchNumber = no => {
-    console.log("inside searchNumber : " + no);
-  };
 
-  const searchNumber = (number, no) => {
-    console.log("inside searchNumber");
-    consoleNumber();
-    consoleSearchNumber(no);
+  const searchResult = (num1, num2, num3, num4, num5, num6) => {
+    num1 = parseInt(num1, 10);
+    num2 = parseInt(num2, 10);
+    num3 = parseInt(num3, 10);
+    num4 = parseInt(num4, 10);
+    num5 = parseInt(num5, 10);
+    num6 = parseInt(num6, 10);
+
     var filtered;
-    if (no === "no1") {
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
       filtered = totalLottoDB.filter(dd => {
-        if (dd[no] === parseInt(number, 10)) return true;
+        if (dd.no1 === num1) return true;
         else return false;
       });
     }
-    if (no === "no2") {
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
       filtered = totalLottoDB.filter(dd => {
-        if (dd.no1 === parseInt(number1, 10) && dd[no] === parseInt(number, 10))
-          return true;
+        if (dd.no2 === num2) return true;
         else return false;
       });
     }
-    if (no === "no3") {
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no3 === num3) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no4 === num4) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no2 === num2) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no3 === num3) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no4 === num4) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no3 === num3) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no4 === num4) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no3 === num3 && dd.no4 === num4) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no3 === num3 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no3 === num3 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no4 === num4 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no4 === num4 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no5 === num5 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no2 === num2 && dd.no3 === num3) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no2 === num2 && dd.no4 === num4) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no2 === num2 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no2 === num2 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no3 === num3 && dd.no4 === num4) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no3 === num3 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no3 === num3 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no4 === num4 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no4 === num4 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no1 === num1 && dd.no5 === num5 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no3 === num3 && dd.no4 === num4) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no3 === num3 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no3 === num3 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no4 === num4 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no4 === num4 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no2 === num2 && dd.no5 === num5 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no3 === num3 && dd.no4 === num4 && dd.no5 === num5) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no3 === num3 && dd.no4 === num4 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no3 === num3 && dd.no5 === num5 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (dd.no4 === num4 && dd.no5 === num5 && dd.no6 === num6) return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      isNaN(num6)
+    ) {
       filtered = totalLottoDB.filter(dd => {
         if (
-          dd.no1 === parseInt(number1, 10) &&
-          dd.no2 === parseInt(number2, 10) &&
-          dd[no] === parseInt(number, 10)
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4
         )
           return true;
         else return false;
       });
     }
-    if (no === "no4") {
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
       filtered = totalLottoDB.filter(dd => {
         if (
-          dd.no1 === parseInt(number1, 10) &&
-          dd.no2 === parseInt(number2, 10) &&
-          dd.no3 === parseInt(number3, 10) &&
-          dd[no] === parseInt(number, 10)
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no5 === num5
         )
           return true;
         else return false;
       });
     }
-    if (no === "no5") {
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
       filtered = totalLottoDB.filter(dd => {
         if (
-          dd.no1 === parseInt(number1, 10) &&
-          dd.no2 === parseInt(number2, 10) &&
-          dd.no3 === parseInt(number3, 10) &&
-          dd.no4 === parseInt(number4, 10) &&
-          dd[no] === parseInt(number, 10)
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no6 === num6
         )
           return true;
         else return false;
       });
     }
-    if (no === "no6") {
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
       filtered = totalLottoDB.filter(dd => {
         if (
-          dd.no1 === parseInt(number1, 10) &&
-          dd.no2 === parseInt(number2, 10) &&
-          dd.no3 === parseInt(number3, 10) &&
-          dd.no4 === parseInt(number4, 10) &&
-          dd.no5 === parseInt(number5, 10) &&
-          dd[no] === parseInt(number, 10)
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5
         )
           return true;
         else return false;
       });
     }
-    setFilteredLotto(filtered);
-  };
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no4 === num4 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no3 === num3 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no2 === num2 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
+    if (
+      !isNaN(num1) &&
+      !isNaN(num2) &&
+      !isNaN(num3) &&
+      !isNaN(num4) &&
+      !isNaN(num5) &&
+      !isNaN(num6)
+    ) {
+      filtered = totalLottoDB.filter(dd => {
+        if (
+          dd.no1 === num1 &&
+          dd.no2 === num2 &&
+          dd.no3 === num3 &&
+          dd.no4 === num4 &&
+          dd.no5 === num5 &&
+          dd.no6 === num6
+        )
+          return true;
+        else return false;
+      });
+    }
 
-  const consoleNumber = () => {
-    console.log("1 : " + number1);
-    console.log("2 : " + number2);
-    console.log("3 : " + number3);
-    console.log("4 : " + number4);
-    console.log("5 : " + number5);
-    console.log("6 : " + number6);
+    setFilteredLotto(filtered);
   };
 
   const handleChange1 = e => {
     e.preventDefault();
-    console.log(e.target.value);
-    if (e.target.value.trim() === "") {
+    // console.log(e.target.value);
+    if (e.target.value.trim() === '') {
       setFilteredLotto(totalLottoDB);
-      console.log("inside handlechange1 if blank");
-      setNumber1("");
+      setNumber1('');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      // console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
-        if (inputData > 0) {
-          searchNumber(inputData, "no1");
-        }
         setNumber1(e.target.value);
+        if (inputData > 0) {
+          searchResult(inputData, number2, number3, number4, number5, number6);
+        }
       }
     }
   };
   const handleChange2 = e => {
     e.preventDefault();
-    console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      // setFilteredLotto(totalLottoDB);
-      console.log("inside handlechange2 if blank");
-      setNumber2("");
-      searchNumber(number1, "no1");
+    // console.log(e.target.value);
+    if (e.target.value.trim() === '') {
+      setNumber2('');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      // console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
-        if (inputData > 0) {
-          searchNumber(inputData, "no2");
-        }
         setNumber2(e.target.value);
+        if (inputData > 0) {
+          searchResult(number1, inputData, number3, number4, number5, number6);
+        }
       }
     }
   };
   const handleChange3 = e => {
     e.preventDefault();
-    console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      setNumber3("");
-      searchNumber(number2, "no2");
+    // console.log(e.target.value);
+    if (e.target.value.trim() === '') {
+      setNumber3('');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      // console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
-        if (inputData > 0) {
-          searchNumber(inputData, "no3");
-        }
         setNumber3(e.target.value);
+        if (inputData > 0) {
+          searchResult(number1, number2, inputData, number4, number5, number6);
+        }
       }
     }
   };
   const handleChange4 = e => {
     e.preventDefault();
-    console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      setNumber4("");
-      searchNumber(number3, "no3");
+    // console.log(e.target.value);
+    if (e.target.value.trim() === '') {
+      setNumber4('');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      // console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
-        if (inputData > 0) {
-          searchNumber(inputData, "no4");
-        }
         setNumber4(e.target.value);
+        if (inputData > 0) {
+          searchResult(number1, number2, number3, inputData, number5, number6);
+        }
       }
     }
   };
   const handleChange5 = e => {
     e.preventDefault();
-    console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      setNumber5("");
-      searchNumber(number4, "no4");
+    // console.log(e.target.value);
+    if (e.target.value.trim() === '') {
+      setNumber5('');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      // console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
-        if (inputData > 0) {
-          searchNumber(inputData, "no5");
-        }
         setNumber5(e.target.value);
+        if (inputData > 0) {
+          searchResult(number1, number2, number3, number4, inputData, number6);
+        }
       }
     }
   };
   const handleChange6 = e => {
     e.preventDefault();
-    console.log(e.target.value);
-    if (e.target.value.trim() === "") {
-      setNumber6("");
-      searchNumber(number5, "no5");
+    // console.log(e.target.value);
+    if (e.target.value.trim() === '') {
+      setNumber6('');
     } else {
       let inputData = parseInt(e.target.value);
-      console.log("inputData :" + inputData);
+      // console.log('inputData :' + inputData);
       if (e.target.value >= 0 && inputData < 46) {
-        if (inputData > 0) {
-          searchNumber(inputData, "no6");
-        }
         setNumber6(e.target.value);
+        if (inputData > 0) {
+          searchResult(number1, number2, number3, number4, number5, inputData);
+        }
       }
     }
   };
@@ -284,7 +1164,7 @@ const ListAll = () => {
       <Paper>
         <Typography
           variant="h4"
-          style={{ textAlign: "center", padding: "20px" }}
+          style={{ textAlign: 'center', padding: '20px' }}
         >
           Search My Data
         </Typography>
@@ -292,11 +1172,11 @@ const ListAll = () => {
       <Button
         variant="contained"
         style={{
-          background: "purple",
-          color: "white",
-          width: "100%",
-          marginTop: "10px",
-          marginBottom: "10px"
+          background: 'purple',
+          color: 'white',
+          width: '100%',
+          marginTop: '10px',
+          marginBottom: '10px'
         }}
         onClick={resetQuery}
       >
@@ -377,11 +1257,11 @@ const ListAll = () => {
 
       <Table>
         <TableHead>
-          <TableRow style={{ background: "black" }}>
+          <TableRow style={{ background: 'black' }}>
             <TableCell>
               <Typography
                 variant="h6"
-                style={{ fontSize: "1.2rem", color: "white", marginTop: "3px" }}
+                style={{ fontSize: '1.2rem', color: 'white', marginTop: '3px' }}
               >
                 Total: {filteredLotto.length}
               </Typography>
@@ -393,18 +1273,18 @@ const ListAll = () => {
             <TableRow
               key={i}
               style={
-                i % 2 ? { background: "#dee2e6" } : { background: "white" }
+                i % 2 ? { background: '#dee2e6' } : { background: 'white' }
               }
             >
               <TableCell>
                 <Link
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: 'none' }}
                   to={{
                     pathname: `${i}`,
                     state: d
                   }}
                 >
-                  <Typography variant="inherit" style={{ fontSize: "1rem" }}>
+                  <Typography variant="inherit" style={{ fontSize: '1rem' }}>
                     {d.round} / {d.date} / {d.no1}-{d.no2}-{d.no3}-{d.no4}-
                     {d.no5}-{d.no6}
                   </Typography>
