@@ -82,8 +82,9 @@ export default function Header() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={() => setDrawOpen(true)}
           >
-            <MenuIcon onClick={() => setDrawOpen(true)} />
+            <MenuIcon  />
           </IconButton>
           <Drawer open={drawOpen} onClick={() => setDrawOpen(false)}>
             <div tabIndex={0} role="button" onClick={() => setDrawOpen(false)}>
