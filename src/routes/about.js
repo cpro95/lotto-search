@@ -8,11 +8,13 @@ const About = () => {
       <Header />
       <Paper style={{ margin: '20px', padding: '20px' }}>
         <Typography variant="h5">
-          This SPA app is made by ReactJS with Material-UI
+          안녕하세요?
           <br />
-          You can search the patterns inside of your DB
+          역대 로또 당첨 번호를 쉽게 분석할 수 있게 만들었습니다.
           <br />
-          Good Luck!
+          각 자리별 당첨 숫자로 패턴 검색 해보세요
+          <br />
+          행운을 빕니다.
         </Typography>
       </Paper>
     </>

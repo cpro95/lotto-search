@@ -1163,10 +1163,10 @@ const ListAll = () => {
       <Header />
       <Paper>
         <Typography
-          variant="h4"
+          variant="h1"
           style={{ textAlign: 'center', padding: '20px' }}
         >
-          Search My Data
+          역대 로또 당첨번호 분석, 검색
         </Typography>
       </Paper>
       <Button
@@ -1180,7 +1180,7 @@ const ListAll = () => {
         }}
         onClick={resetQuery}
       >
-        Reset
+        리셋
       </Button>
 
       <Grid container justify="center" alignItems="center">
@@ -1263,7 +1263,7 @@ const ListAll = () => {
                 variant="h6"
                 style={{ fontSize: '1.2rem', color: 'white', marginTop: '3px' }}
               >
-                Total: {filteredLotto.length}
+                전체: {filteredLotto.length}
               </Typography>
             </TableCell>
           </TableRow>

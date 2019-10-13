@@ -5,7 +5,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
   IconButton
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,7 +15,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import TalkIcon from '@material-ui/icons/Chat';
-import SvgIcon from '@material-ui/core/SvgIcon';
+// import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,7 +46,7 @@ export default function Header() {
           <ListItemIcon>
             <TalkIcon />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          <ListItemText primary="로또 검색" />
         </ListItem>
       </Link>
       <Divider />
@@ -56,11 +55,11 @@ export default function Header() {
           <ListItemIcon>
             <TalkIcon />
           </ListItemIcon>
-          <ListItemText primary="About" />
+          <ListItemText primary="사용법" />
         </ListItem>
       </Link>
       <Divider />
-      <a style={{ textDecoration: 'none' }} href="http://github.com/cpro95">
+      {/* <a style={{ textDecoration: 'none' }} href="http://github.com/cpro95">
         <ListItem button>
           <ListItemIcon>
             <SvgIcon>
@@ -69,7 +68,7 @@ export default function Header() {
           </ListItemIcon>
           <ListItemText primary="Github" />
         </ListItem>
-      </a>
+      </a> */}
     </div>
   );
 
@@ -99,14 +98,14 @@ export default function Header() {
             />
           </Link>
           <Typography variant="h6" className={classes.title}>
-            Good Luck!
+            역대 로또 당첨번호 분석, 검색
           </Typography>
-          <Link
+          {/* <Link
             to={'/about'}
             style={{ color: 'white', textDecoration: 'none' }}
           >
             <Button color="inherit">About</Button>
-          </Link>
+          </Link> */}
         </Toolbar>
       </AppBar>
     </div>
