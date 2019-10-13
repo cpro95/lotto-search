@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
 import * as lottoDB from '../lotto_db.json';
 import Header from '../components/header';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Paper, Typography } from '@material-ui/core';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Button,
-  Grid,
-  Avatar,
-  TextField
-} from '@material-ui/core';
+import { Button, Grid, Avatar, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   deepOrange,
@@ -22,6 +12,7 @@ import {
   indigo,
   brown
 } from '@material-ui/core/colors';
+import MUIDataTable from 'mui-datatables';
 
 const useStyles = makeStyles({
   avatar: {
@@ -62,7 +53,7 @@ const useStyles = makeStyles({
   }
 });
 
-const ListAll = () => {
+const ListAll = props => {
   const classes = useStyles();
   // After importing array from files, it returns Object.
   // Your data is in Object.default
@@ -86,7 +77,6 @@ const ListAll = () => {
     setNumber6('');
     setFilteredLotto(totalLottoDB);
   };
-
 
   const searchResult = (num1, num2, num3, num4, num5, num6) => {
     num1 = parseInt(num1, 10);
@@ -1158,6 +1148,50 @@ const ListAll = () => {
     }
   };
 
+  // MUIDATATALBES columns
+  const columns = [
+    {
+      label: '회차',
+      name: 'round',
+      options: {
+        sort: true,
+        sortDirection: 'desc'
+      }
+    },
+    {
+      label: '추첨일',
+      name: 'date',
+      options: {
+        sort: true
+      }
+    },
+    { label: '당첨번호1', name: 'no1', options: { display: false } },
+    { label: '당첨번호2', name: 'no2', options: { display: false } },
+    { label: '당첨번호3', name: 'no3', options: { display: false } },
+    { label: '당첨번호4', name: 'no4', options: { display: false } },
+    { label: '당첨번호5', name: 'no5', options: { display: false } },
+    { label: '당첨번호6', name: 'no6', options: { display: false } },
+    {
+      labe: '당첨번호',
+      name: '당첨번호',
+      options: {
+        display: true,
+        filter: false,
+        viewColumns: false,
+        sort: false,
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <div>
+              {tableMeta.rowData[2]} - {tableMeta.rowData[3]} -{' '}
+              {tableMeta.rowData[4]} - {tableMeta.rowData[5]} -{' '}
+              {tableMeta.rowData[6]} - {tableMeta.rowData[7]}
+            </div>
+          );
+        }
+      }
+    }
+  ];
+
   return (
     <>
       <Header />
@@ -1255,47 +1289,40 @@ const ListAll = () => {
         </Grid>
       </Grid>
 
-      <Table>
-        <TableHead>
-          <TableRow style={{ background: 'black' }}>
-            <TableCell>
-              <Typography
-                variant="h6"
-                style={{ fontSize: '1.2rem', color: 'white', marginTop: '3px' }}
-              >
-                전체: {filteredLotto.length}
-              </Typography>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {filteredLotto.map((d, i) => (
-            <TableRow
-              key={i}
-              style={
-                i % 2 ? { background: '#dee2e6' } : { background: 'white' }
-              }
-            >
-              <TableCell>
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  to={{
-                    pathname: `${i}`,
-                    state: d
-                  }}
-                >
-                  <Typography variant="inherit" style={{ fontSize: '1rem' }}>
-                    {d.round} / {d.date} / {d.no1}-{d.no2}-{d.no3}-{d.no4}-
-                    {d.no5}-{d.no6}
-                  </Typography>
-                </Link>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <Typography
+        variant="h6"
+        style={{
+          fontSize: '1.2rem',
+          color: 'black',
+          marginTop: '10px',
+          marginLeft: '10px'
+        }}
+      >
+        전체: {filteredLotto.length}
+      </Typography>
+      <MUIDataTable
+        title="로또 리스트"
+        data={filteredLotto}
+        columns={columns}
+        options={{
+          filter: true,
+          search: true,
+          print: true,
+          download: true,
+          selectableRows: 'none',
+          responsive: 'scrollMaxHeight',
+          rowsPerPage: 20,
+          rowsPerPageOptions: [10, 20, 100, 200, 300, 400, 500, 100000],
+          onRowClick: (rowData, rowMeta) => {
+            props.history.push({
+              pathname: `${rowMeta.rowIndex}`,
+              state: filteredLotto[rowMeta.rowIndex]
+            });
+          }
+        }}
+      />
     </>
   );
 };
 
-export default ListAll;
+export default withRouter(ListAll);
