@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as lottoDB from '../lotto_db.json';
 import Header from '../components/header';
 import { withRouter } from 'react-router-dom';
-import { Paper, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { Button, Grid, Avatar, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -1195,14 +1195,14 @@ const ListAll = props => {
   return (
     <>
       <Header />
-      <Paper>
+      {/* <Paper>
         <Typography
           variant="h1"
           style={{ textAlign: 'center', padding: '20px' }}
         >
           역대 로또 당첨번호 분석, 검색
         </Typography>
-      </Paper>
+      </Paper> */}
       <Button
         variant="contained"
         style={{
