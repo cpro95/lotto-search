@@ -1311,7 +1311,7 @@ const ListAll = props => {
           download: true,
           selectableRows: 'none',
           responsive: 'scrollMaxHeight',
-          rowsPerPage: 20,
+          rowsPerPage: 100000,
           rowsPerPageOptions: [10, 20, 100, 200, 300, 400, 500, 100000],
           onRowClick: (rowData, rowMeta) => {
             props.history.push({
